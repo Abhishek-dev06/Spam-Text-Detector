@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spam Text Detector</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <div class="hero">
+            <div class="badge">AI / ML CLUB PROJECT</div>
+            <h1>Spam Text Detector</h1>
+            <p>
+                Enter an SMS, message, or short headline and let the ML model
+                estimate whether it looks genuine or spam.
+            </p>
+        </div>
+
+        <section class="card detector-card">
+            <label for="textInput">Enter your text</label>
+
+            <textarea
+                id="textInput"
+                maxlength="1000"
+                placeholder="Example: Congratulations! You have won a free prize. Click now..."
+            ></textarea>
+
+            <div class="input-footer">
+                <span id="charCount">0 / 1000</span>
+                <button id="checkBtn">Check Text</button>
+            </div>
+
+            <div id="loading" class="loading hidden">
+                <span class="spinner"></span>
+                Analyzing text...
+            </div>
+
+            <div id="resultCard" class="result hidden">
+                <p class="result-small">Prediction</p>
+                <h2 id="resultLabel">Genuine</h2>
+
+                <div class="confidence-row">
+                    <span>Confidence</span>
+                    <strong id="confidenceText">0%</strong>
+                </div>
+
+                <div class="progress">
+                    <div id="confidenceBar"></div>
+                </div>
+            </div>
+
+            <p id="errorMessage" class="error hidden"></p>
+        </section>
+
+        <section class="card">
+            <div class="section-heading">
+                <h2>Recent Predictions</h2>
+                <button id="clearHistory" class="ghost-btn">Clear</button>
+            </div>
+
+            <div id="historyList" class="history-list">
+                <p class="empty-state">No predictions yet.</p>
+            </div>
+        </section>
+
+        <footer>
+            <a href="/metrics">View model metrics</a>
+            <span>Built with Flask + TF-IDF + Naive Bayes</span>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
