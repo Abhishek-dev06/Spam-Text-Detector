@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Metrics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <div class="hero">
+            <div class="badge">MODEL PERFORMANCE</div>
+            <h1>Metrics</h1>
+            <p>
+                These values are generated after running the model training script.
+            </p>
+        </div>
+
+        <section class="card">
+            <div id="metricsGrid">
+                Loading metrics...
+            </div>
+        </section>
+
+        <footer>
+            <a href="/">← Back to detector</a>
+        </footer>
+    </main>
+
+    <script>
+        async function loadMetrics() {
+            const container = document.getElementById("metricsGrid");
+
+            try {
+                const response = await fetch("/api/metrics");
+
+                if (!response.ok) {
+                    throw new Error("Could not load metrics.");
+                }
+
+                const data = await response.json();
+
+                container.innerHTML = `
+                    <div class="history-list">
+                        <div class="history-item">
+                            <p>Accuracy</p>
+                            <strong>${data.accuracy}%</strong>
+                        </div>
+                        <div class="history-item">
+                            <p>Spam Precision</p>
+                            <strong>${data.spam_precision}%</strong>
+                        </div>
+                        <div class="history-item">
+                            <p>Spam Recall</p>
+                            <strong>${data.spam_recall}%</strong>
+                        </div>
+                        <div class="history-item">
+                            <p>Spam F1 Score</p>
+                            <strong>${data.spam_f1}%</strong>
+                        </div>
+                        <div class="history-item">
+                            <p>Test Samples</p>
+                            <strong>${data.test_samples}</strong>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                container.innerHTML =
+                    '<p class="error">Train the model first to generate metrics.</p>';
+            }
+        }
+
+        loadMetrics();
+    </script>
+</body>
+</html>
