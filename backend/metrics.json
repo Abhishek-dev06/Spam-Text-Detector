@@ -1,0 +1,7 @@
+{
+    "accuracy": 96.77,
+    "spam_precision": 99.13,
+    "spam_recall": 76.51,
+    "spam_f1": 86.36,
+    "test_samples": 1115
+}
